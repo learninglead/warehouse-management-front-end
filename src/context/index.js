@@ -1,23 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/**
-  This file is used for controlling the global states of the components,
-  you can customize the states for the different components here.
-*/
-
 import { createContext, useContext, useReducer, useMemo } from "react";
 
 // prop-types is a library for typechecking of props
@@ -50,9 +30,7 @@ function reducer(state, action) {
     case "FIXED_NAVBAR": {
       return { ...state, fixedNavbar: action.value };
     }
-    case "OPEN_CONFIGURATOR": {
-      return { ...state, openConfigurator: action.value };
-    }
+
     case "DIRECTION": {
       return { ...state, direction: action.value };
     }
@@ -61,6 +39,9 @@ function reducer(state, action) {
     }
     case "DARKMODE": {
       return { ...state, darkMode: action.value };
+    }
+    case "USER": {
+      return { ...state, user: action.value };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -77,10 +58,10 @@ function MaterialUIControllerProvider({ children }) {
     sidenavColor: "info",
     transparentNavbar: true,
     fixedNavbar: true,
-    openConfigurator: false,
     direction: "ltr",
     layout: "dashboard",
     darkMode: false,
+    user: {},
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -115,10 +96,10 @@ const setWhiteSidenav = (dispatch, value) => dispatch({ type: "WHITE_SIDENAV", v
 const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
 const setTransparentNavbar = (dispatch, value) => dispatch({ type: "TRANSPARENT_NAVBAR", value });
 const setFixedNavbar = (dispatch, value) => dispatch({ type: "FIXED_NAVBAR", value });
-const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGURATOR", value });
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARKMODE", value });
+const setUser = (dispatch, value) => dispatch({ type: "USER", value });
 
 export {
   MaterialUIControllerProvider,
@@ -129,8 +110,8 @@ export {
   setSidenavColor,
   setTransparentNavbar,
   setFixedNavbar,
-  setOpenConfigurator,
   setDirection,
   setLayout,
   setDarkMode,
+  setUser,
 };
